@@ -6,9 +6,6 @@ appconfigpy
 
 .. image:: https://img.shields.io/pypi/pyversions/appconfigpy.svg
     :target: https://pypi.python.org/pypi/appconfigpy
-   
-.. image:: https://coveralls.io/repos/github/thombashi/appconfigpy/badge.svg?branch=master
-    :target: https://coveralls.io/github/thombashi/appconfigpy?branch=master
 
 
 Summary
