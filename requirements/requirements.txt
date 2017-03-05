@@ -1,0 +1,4 @@
+click>=0.6.7
+logbook>=1.0.0
+pathvalidate>=0.14.1
+typepy>=0.0.4
