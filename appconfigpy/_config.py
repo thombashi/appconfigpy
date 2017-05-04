@@ -81,8 +81,8 @@ class ConfigManager(object):
                 return {}
 
         self.__logger.debug(
-            "configuration file found: path='{}', loaded-values={}".format(
-                self.config_file_path, json.dumps(loaded_config, indent=4)))
+            "configuration file found: path='{}', loaded-entries={}".format(
+                self.config_file_path, len(loaded_config)))
 
         valid_config = {}
         for config_item in self.__config_item_list:
@@ -93,7 +93,7 @@ class ConfigManager(object):
                 config_item.config_name)
 
         self.__logger.debug("valid loaded configurations: {}".format(
-            json.dumps(valid_config, indent=4)))
+            len(valid_config)))
 
         return valid_config
 
@@ -120,8 +120,8 @@ class ConfigManager(object):
                 raise KeyboardInterrupt()
 
         self.__logger.debug(
-            "new configurations: {}".format(
-                json.dumps(new_config, indent=4, ensure_ascii=False)))
+            "written {} configurations".format(
+                len(self.__config_item_list)))
 
         return self.__write_config(new_config)
 
