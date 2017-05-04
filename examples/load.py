@@ -11,5 +11,4 @@ from __future__ import unicode_literals
 from common import app_config_manager
 
 
-if __name__ == "__main__":
-    print(app_config_manager.load())
+print(app_config_manager.load())

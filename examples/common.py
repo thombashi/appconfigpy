@@ -10,6 +10,7 @@ from __future__ import unicode_literals
 
 import appconfigpy
 
+
 CONFIG_NAME = "example"
 CONFIG_ITEM_LIST = [
     appconfigpy.ConfigItem(
