@@ -24,13 +24,14 @@ pytest_runner = ["pytest-runner"] if needs_pytest else []
 with io.open("README.rst", encoding=ENCODING) as fp:
     long_description = fp.read()
 
-with io.open(os.path.join(REQUIREMENT_DIR, "requirements.txt"), encoding=ENCODING) as f:
+with io.open(os.path.join(
+        REQUIREMENT_DIR, "requirements.txt"), encoding=ENCODING) as f:
     install_requires = [line.strip() for line in f if line.strip()]
 
 
 setuptools.setup(
     name=PROJECT_NAME,
-    version="0.0.1",
+    version="0.0.2",
     author="Tsuyoshi Hombashi",
     author_email="gogogo.vm@gmail.com",
     url="https://github.com/thombashi/{:s}".format(PROJECT_NAME),
