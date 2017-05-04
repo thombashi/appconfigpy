@@ -25,4 +25,9 @@ app_config_manager = appconfigpy.ConfigManager(
             prompt_text="Path",
             initial_value=".",
         ),
+        appconfigpy.ConfigItem(
+            name="proxy",
+            prompt_text="Proxy Server URI",
+            initial_value="",
+        ),
     ])
