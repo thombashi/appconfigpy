@@ -54,6 +54,10 @@ class ConfigManager(object):
     def config_file_path(self):
         return self.__config_file_path
 
+    @property
+    def exists(self):
+        return os.path.exists(self.__config_file_path)
+
     def __init__(self, config_name, config_item_list):
         pathvalidate.validate_filename(config_name)
 
