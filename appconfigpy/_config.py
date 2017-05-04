@@ -107,9 +107,13 @@ class ConfigManager(object):
             ]):
                 prompt_text += " [{}]".format("*" * 10 + str(old_value)[-4:])
 
-            new_config[config_item.config_name] = click.prompt(
-                prompt_text, type=config_item.value_type, default=old_value,
-                show_default=config_item.show_default)
+            try:
+                new_config[config_item.config_name] = click.prompt(
+                    prompt_text, type=config_item.value_type,
+                    default=old_value,
+                    show_default=config_item.show_default)
+            except click.exceptions.Abort:
+                raise KeyboardInterrupt()
 
         self.__logger.debug(
             "new configurations: {}".format(
