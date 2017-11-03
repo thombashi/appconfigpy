@@ -13,6 +13,7 @@ import os.path
 
 import click
 import pathvalidate
+import six
 import typepy
 
 from ._logger import logger
@@ -109,7 +110,8 @@ class ConfigManager(object):
                 old_value,
                 config_item.default_display_style == DefaultDisplayStyle.PART_VISIBLE
             ]):
-                prompt_text += " [{}]".format("*" * 10 + str(old_value)[-4:])
+                prompt_text += " [{}]".format(
+                    "*" * 10 + six.text_type(old_value)[-4:])
 
             try:
                 new_config[config_item.config_name] = click.prompt(
