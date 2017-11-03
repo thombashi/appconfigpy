@@ -16,6 +16,7 @@ import pathvalidate
 import six
 import typepy
 
+from ._const import NULL_VALUE
 from ._logger import logger
 
 
@@ -108,6 +109,7 @@ class ConfigManager(object):
             prompt_text = config_item.prompt_text
             if all([
                 old_value,
+                old_value != NULL_VALUE,
                 config_item.default_display_style == DefaultDisplayStyle.PART_VISIBLE
             ]):
                 prompt_text += " [{}]".format(
