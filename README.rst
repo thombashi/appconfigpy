@@ -25,7 +25,7 @@ Usage
 =====
 
 Create A Configuration File
-==============================
+------------------------------------
 .. code:: python
     
     # configure.py
@@ -66,7 +66,7 @@ Create A Configuration File
     }
 
 Load A Configuration File
-==============================
+------------------------------------
 .. code:: python
     
     # load.py
@@ -99,11 +99,9 @@ Load A Configuration File
 
 Dependencies
 ============
-
-Python 2.7+ or 3.3+
+Python 2.7+ or 3.4+
 
 - `click <https://github.com/pallets/click>`__
 - `logbook <http://logbook.readthedocs.io/en/stable/>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `typepy <https://github.com/thombashi/typepy>`__
-
