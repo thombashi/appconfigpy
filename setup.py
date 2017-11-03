@@ -31,7 +31,7 @@ with io.open(os.path.join(
 
 setuptools.setup(
     name=PROJECT_NAME,
-    version="0.0.2",
+    version="0.0.3",
     author="Tsuyoshi Hombashi",
     author_email="gogogo.vm@gmail.com",
     url="https://github.com/thombashi/{:s}".format(PROJECT_NAME),
