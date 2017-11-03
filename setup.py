@@ -36,9 +36,8 @@ setuptools.setup(
     author_email="gogogo.vm@gmail.com",
     url="https://github.com/thombashi/{:s}".format(PROJECT_NAME),
     license="MIT License",
-    description="""
-    A Python library to create/load an application configuration file.
-    """,
+    description=(
+        "A Python library to create/load an application configuration file."),
     include_package_data=True,
     install_requires=install_requires,
     keywords=["configuration"],
