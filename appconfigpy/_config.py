@@ -77,7 +77,7 @@ class ConfigManager(object):
             try:
                 loaded_config = json.load(f)
             except ValueError as e:
-                self.__logger.debug(e)
+                self.__logger.debug("{:s}: {}".format(e.__class__.__name__, e))
                 return {}
 
         self.__logger.debug(
@@ -131,7 +131,7 @@ class ConfigManager(object):
                 f.write(
                     json.dumps(config, indent=4, ensure_ascii=False) + "\n")
         except IOError as e:
-            self.__logger.error(e)
+            self.__logger.error("{:s}: {}".format(e.__class__.__name__, e))
             return e.args[0]
 
         self.__logger.debug(
