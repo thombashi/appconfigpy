@@ -48,6 +48,7 @@ setuptools.setup(
     license=pkg_info["__license__"],
     long_description=long_description,
     packages=setuptools.find_packages(exclude=["test*"]),
+    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*',
 
     install_requires=SETUPTOOLS_REQUIRES + install_requires,
     setup_requires=SETUPTOOLS_REQUIRES,
