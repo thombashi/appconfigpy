@@ -11,6 +11,7 @@ import json
 import os.path
 
 import click
+import msgfy
 import pathvalidate
 import six
 import typepy
@@ -78,7 +79,7 @@ class ConfigManager(object):
             try:
                 loaded_config = json.load(f)
             except ValueError as e:
-                self.__logger.debug("{:s}: {}".format(e.__class__.__name__, e))
+                self.__logger.debug(msgfy.to_debug_message(e))
                 return {}
 
         self.__logger.debug(
@@ -134,7 +135,7 @@ class ConfigManager(object):
                 f.write(
                     json.dumps(config, indent=4, ensure_ascii=False) + "\n")
         except IOError as e:
-            self.__logger.error("{:s}: {}".format(e.__class__.__name__, e))
+            self.__logger.error(msgfy.to_error_message(e))
             return e.args[0]
 
         self.__logger.debug(
