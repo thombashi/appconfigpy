@@ -7,7 +7,10 @@
 
 from __future__ import print_function, unicode_literals
 
+import json
+
 from common import app_config_manager
 
 
-print(app_config_manager.load())
+print("loading configuration file path: {:s}".format(app_config_manager.config_file_path))
+print("configuration values: {}".format(json.dumps(app_config_manager.load(), indent=4)))

@@ -11,6 +11,7 @@ from common import app_config_manager
 
 
 try:
+    # input configurations are written to ~/.example
     app_config_manager.configure()
 except KeyboardInterrupt:
     print()

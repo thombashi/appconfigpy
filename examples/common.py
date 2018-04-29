@@ -21,12 +21,13 @@ app_config_manager = appconfigpy.ConfigManager(
         ),
         appconfigpy.ConfigItem(
             name="path",
-            prompt_text="Path",
+            prompt_text="ABC Path",
             initial_value=".",
         ),
         appconfigpy.ConfigItem(
-            name="proxy",
-            prompt_text="Proxy Server URI",
+            name="number",
+            prompt_text="XYZ Number",
             initial_value="",
+            value_type=int,
         ),
     ])
