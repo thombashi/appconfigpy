@@ -28,8 +28,7 @@ with open(os.path.join(MODULE_NAME, "__version__.py")) as f:
 with io.open("README.rst", encoding=ENCODING) as fp:
     long_description = fp.read()
 
-with io.open(os.path.join(
-        REQUIREMENT_DIR, "requirements.txt"), encoding=ENCODING) as f:
+with io.open(os.path.join(REQUIREMENT_DIR, "requirements.txt"), encoding=ENCODING) as f:
     install_requires = [line.strip() for line in f if line.strip()]
 
 SETUPTOOLS_REQUIRES = ["setuptools>=38.3.0"]
@@ -41,8 +40,7 @@ setuptools.setup(
 
     author=pkg_info["__author__"],
     author_email=pkg_info["__email__"],
-    description=(
-        "A Python library to create/load an application configuration file."),
+    description="A Python library to create/load an application configuration file.",
     include_package_data=True,
     keywords=["configuration"],
     license=pkg_info["__license__"],
