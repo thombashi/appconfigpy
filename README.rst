@@ -27,7 +27,7 @@ Usage
 Create A Configuration File
 ------------------------------------
 .. code:: python
-    
+
     # configure.py
 
     import appconfigpy
@@ -68,7 +68,7 @@ Create A Configuration File
 Load A Configuration File
 ------------------------------------
 .. code:: python
-    
+
     # load.py
 
     import appconfigpy
@@ -101,7 +101,11 @@ Dependencies
 ============
 Python 2.7+ or 3.4+
 
-- `click <https://github.com/pallets/click>`__
 - `logbook <http://logbook.readthedocs.io/en/stable/>`__
+- `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `typepy <https://github.com/thombashi/typepy>`__
+
+Optional Dependencies
+------------------------------------
+- `click <https://github.com/pallets/click>`__
