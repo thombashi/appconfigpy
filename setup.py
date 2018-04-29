@@ -53,6 +53,9 @@ setuptools.setup(
     install_requires=SETUPTOOLS_REQUIRES + install_requires,
     setup_requires=SETUPTOOLS_REQUIRES,
     tests_require=[],
+    extras_require={
+        "build": "wheel",
+    },
 
     classifiers=[
         "Development Status :: 3 - Alpha",
