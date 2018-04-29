@@ -18,8 +18,6 @@ PROJECT_NAME = "appconfigpy"
 REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"
 
-needs_pytest = set(["pytest", "test", "ptr"]).intersection(sys.argv)
-pytest_runner = ["pytest-runner"] if needs_pytest else []
 
 with io.open("README.rst", encoding=ENCODING) as fp:
     long_description = fp.read()
@@ -28,6 +26,7 @@ with io.open(os.path.join(
         REQUIREMENT_DIR, "requirements.txt"), encoding=ENCODING) as f:
     install_requires = [line.strip() for line in f if line.strip()]
 
+SETUPTOOLS_REQUIRES = ["setuptools>=38.3.0"]
 
 setuptools.setup(
     name=PROJECT_NAME,
@@ -39,12 +38,14 @@ setuptools.setup(
     description=(
         "A Python library to create/load an application configuration file."),
     include_package_data=True,
-    install_requires=install_requires,
     keywords=["configuration"],
     long_description=long_description,
     packages=setuptools.find_packages(exclude=["test*"]),
-    setup_requires=pytest_runner,
+
+    install_requires=SETUPTOOLS_REQUIRES + install_requires,
+    setup_requires=SETUPTOOLS_REQUIRES,
     tests_require=[],
+
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
