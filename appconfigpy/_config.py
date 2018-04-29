@@ -71,8 +71,7 @@ class ConfigManager(object):
     def load(self):
         if not os.path.isfile(self.config_file_path):
             self.__logger.debug(
-                "configuration file not found: path='{}'".format(
-                    self.config_file_path))
+                "configuration file not found: path='{}'".format(self.config_file_path))
             return {}
 
         with open(self.config_file_path) as f:
@@ -94,8 +93,7 @@ class ConfigManager(object):
             valid_config[config_item.config_name] = loaded_config.get(
                 config_item.config_name)
 
-        self.__logger.debug("valid loaded configurations: {}".format(
-            len(valid_config)))
+        self.__logger.debug("valid loaded configurations: {}".format(len(valid_config)))
 
         return valid_config
 
@@ -104,16 +102,14 @@ class ConfigManager(object):
         new_config = {}
 
         for config_item in self.__config_item_list:
-            old_value = old_config.get(
-                config_item.config_name, config_item.initial_value)
+            old_value = old_config.get(config_item.config_name, config_item.initial_value)
             prompt_text = config_item.prompt_text
             if all([
                 old_value,
                 old_value != NULL_VALUE,
                 config_item.default_display_style == DefaultDisplayStyle.PART_VISIBLE
             ]):
-                prompt_text += " [{}]".format(
-                    "*" * 10 + six.text_type(old_value)[-4:])
+                prompt_text += " [{}]".format("*" * 10 + six.text_type(old_value)[-4:])
 
             try:
                 new_config[config_item.config_name] = click.prompt(
@@ -123,22 +119,18 @@ class ConfigManager(object):
             except click.exceptions.Abort:
                 raise KeyboardInterrupt()
 
-        self.__logger.debug(
-            "written {} configurations".format(
-                len(self.__config_item_list)))
+        self.__logger.debug("written {} configurations".format(len(self.__config_item_list)))
 
         return self.__write_config(new_config)
 
     def __write_config(self, config):
         try:
             with io.open(self.config_file_path, "w", encoding="utf8") as f:
-                f.write(
-                    json.dumps(config, indent=4, ensure_ascii=False) + "\n")
+                f.write(json.dumps(config, indent=4, ensure_ascii=False) + "\n")
         except IOError as e:
             self.__logger.error(msgfy.to_error_message(e))
             return e.args[0]
 
-        self.__logger.debug(
-            "written configurations to '{:s}'".format(self.config_file_path))
+        self.__logger.debug("written configurations to '{:s}'".format(self.config_file_path))
 
         return 0
