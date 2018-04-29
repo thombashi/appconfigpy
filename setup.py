@@ -14,10 +14,16 @@ import sys
 import setuptools
 
 
-PROJECT_NAME = "appconfigpy"
+MODULE_NAME = "appconfigpy"
+REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
 REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"
 
+pkg_info = {}
+
+
+with open(os.path.join(MODULE_NAME, "__version__.py")) as f:
+    exec(f.read(), pkg_info)
 
 with io.open("README.rst", encoding=ENCODING) as fp:
     long_description = fp.read()
@@ -29,16 +35,17 @@ with io.open(os.path.join(
 SETUPTOOLS_REQUIRES = ["setuptools>=38.3.0"]
 
 setuptools.setup(
-    name=PROJECT_NAME,
-    version="0.0.3",
-    author="Tsuyoshi Hombashi",
-    author_email="tsuyoshi.hombashi@gmail.com",
-    url="https://github.com/thombashi/{:s}".format(PROJECT_NAME),
-    license="MIT License",
+    name=MODULE_NAME,
+    version=pkg_info["__version__"],
+    url=REPOSITORY_URL,
+
+    author=pkg_info["__author__"],
+    author_email=pkg_info["__email__"],
     description=(
         "A Python library to create/load an application configuration file."),
     include_package_data=True,
     keywords=["configuration"],
+    license=pkg_info["__license__"],
     long_description=long_description,
     packages=setuptools.find_packages(exclude=["test*"]),
 
