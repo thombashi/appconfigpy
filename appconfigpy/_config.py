@@ -9,8 +9,8 @@ from __future__ import absolute_import, unicode_literals
 import io
 import json
 import os.path
+import sys
 
-import click
 import msgfy
 import pathvalidate
 import six
@@ -111,17 +111,50 @@ class ConfigManager(object):
             ]):
                 prompt_text += " [{}]".format("*" * 10 + six.text_type(old_value)[-4:])
 
-            try:
-                new_config[config_item.config_name] = click.prompt(
-                    prompt_text, type=config_item.value_type,
-                    default=old_value,
-                    show_default=config_item.show_default)
-            except click.exceptions.Abort:
-                raise KeyboardInterrupt()
+            new_config[config_item.config_name] = self.__prompt_value(
+                prompt_text, old_value, config_item)
 
         self.__logger.debug("written {} configurations".format(len(self.__config_item_list)))
 
         return self.__write_config(new_config)
+
+    def __prompt_value_click(self, prompt_text, current_value, config_item):
+        import click
+
+        try:
+            return click.prompt(
+                prompt_text, type=config_item.value_type,
+                default=current_value, show_default=config_item.show_default)
+        except click.exceptions.Abort:
+            raise KeyboardInterrupt()
+
+    def __prompt_value_builtin(self, prompt_text, current_value, config_item):
+        from six.moves import input
+
+        if config_item.show_default:
+            prompt_text = "{:s} [{}]: ".format(prompt_text, current_value)
+        else:
+            prompt_text = "{:s}: ".format(prompt_text)
+
+        return config_item.value_type(input(prompt_text))
+
+    def __prompt_value(self, prompt_text, current_value, config_item):
+        try:
+            return self.__prompt_value_click(prompt_text, current_value, config_item)
+        except ImportError:
+            pass
+
+        is_valid_value = False
+        new_value = None
+        while not is_valid_value:
+            try:
+                new_value = self.__prompt_value_builtin(prompt_text, current_value, config_item)
+                is_valid_value = True
+            except (TypeError, ValueError):
+                sys.stderr.write("Error: {} is not a valid {}\n".format(
+                    new_value, config_item.value_type))
+
+        return new_value
 
     def __write_config(self, config):
         try:
