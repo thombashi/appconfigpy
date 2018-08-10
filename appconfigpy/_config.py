@@ -29,19 +29,26 @@ class DefaultDisplayStyle(object):
 
 
 class ConfigItem(object):
-
     @property
     def show_default(self):
         return self.default_display_style == DefaultDisplayStyle.VISIBLE
 
     def __init__(
-            self, name, initial_value, value_type=str, prompt_text=None,
-            default_display_style=DefaultDisplayStyle.VISIBLE):
+        self,
+        name,
+        initial_value,
+        value_type=str,
+        prompt_text=None,
+        default_display_style=DefaultDisplayStyle.VISIBLE,
+    ):
         typepy.type.String(name).validate()
 
         if default_display_style not in DefaultDisplayStyle.LIST:
-            raise ValueError("invalid style: expected={}, actual={}".format(
-                DefaultDisplayStyle.LIST, default_display_style))
+            raise ValueError(
+                "invalid style: expected={}, actual={}".format(
+                    DefaultDisplayStyle.LIST, default_display_style
+                )
+            )
 
         self.config_name = name
         self.value_type = value_type
@@ -51,7 +58,6 @@ class ConfigItem(object):
 
 
 class ConfigManager(object):
-
     @property
     def config_file_path(self):
         return self.__config_file_path
@@ -64,14 +70,14 @@ class ConfigManager(object):
         pathvalidate.validate_filename(config_name)
 
         self.__logger = logger
-        self.__config_file_path = os.path.expanduser(
-            os.path.join("~", ".{:s}".format(config_name)))
+        self.__config_file_path = os.path.expanduser(os.path.join("~", ".{:s}".format(config_name)))
         self.__config_item_list = config_item_list
 
     def load(self):
         if not os.path.isfile(self.config_file_path):
             self.__logger.debug(
-                "configuration file not found: path='{}'".format(self.config_file_path))
+                "configuration file not found: path='{}'".format(self.config_file_path)
+            )
             return {}
 
         with open(self.config_file_path) as f:
@@ -83,15 +89,16 @@ class ConfigManager(object):
 
         self.__logger.debug(
             "configuration file found: path='{}', loaded-entries={}".format(
-                self.config_file_path, len(loaded_config)))
+                self.config_file_path, len(loaded_config)
+            )
+        )
 
         valid_config = {}
         for config_item in self.__config_item_list:
             if config_item.config_name not in loaded_config:
                 continue
 
-            valid_config[config_item.config_name] = loaded_config.get(
-                config_item.config_name)
+            valid_config[config_item.config_name] = loaded_config.get(config_item.config_name)
 
         self.__logger.debug("valid loaded configurations: {}".format(len(valid_config)))
 
@@ -104,15 +111,18 @@ class ConfigManager(object):
         for config_item in self.__config_item_list:
             old_value = old_config.get(config_item.config_name, config_item.initial_value)
             prompt_text = config_item.prompt_text
-            if all([
-                old_value,
-                old_value != NULL_VALUE,
-                config_item.default_display_style == DefaultDisplayStyle.PART_VISIBLE
-            ]):
+            if all(
+                [
+                    old_value,
+                    old_value != NULL_VALUE,
+                    config_item.default_display_style == DefaultDisplayStyle.PART_VISIBLE,
+                ]
+            ):
                 prompt_text += " [{}]".format("*" * 10 + six.text_type(old_value)[-4:])
 
             new_config[config_item.config_name] = self.__prompt_value(
-                prompt_text, old_value, config_item)
+                prompt_text, old_value, config_item
+            )
 
         self.__logger.debug("written {} configurations".format(len(self.__config_item_list)))
 
@@ -123,8 +133,11 @@ class ConfigManager(object):
 
         try:
             return click.prompt(
-                prompt_text, type=config_item.value_type,
-                default=current_value, show_default=config_item.show_default)
+                prompt_text,
+                type=config_item.value_type,
+                default=current_value,
+                show_default=config_item.show_default,
+            )
         except click.exceptions.Abort:
             raise KeyboardInterrupt()
 
@@ -151,8 +164,9 @@ class ConfigManager(object):
                 new_value = self.__prompt_value_builtin(prompt_text, current_value, config_item)
                 is_valid_value = True
             except (TypeError, ValueError):
-                sys.stderr.write("Error: {} is not a valid {}\n".format(
-                    new_value, config_item.value_type))
+                sys.stderr.write(
+                    "Error: {} is not a valid {}\n".format(new_value, config_item.value_type)
+                )
 
         return new_value
 

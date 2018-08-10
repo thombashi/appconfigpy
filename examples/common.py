@@ -17,17 +17,11 @@ app_config_manager = appconfigpy.ConfigManager(
             name="token",
             initial_value=None,
             prompt_text="API Token",
-            default_display_style=appconfigpy.DefaultDisplayStyle.PART_VISIBLE
+            default_display_style=appconfigpy.DefaultDisplayStyle.PART_VISIBLE,
         ),
+        appconfigpy.ConfigItem(name="path", prompt_text="ABC Path", initial_value="."),
         appconfigpy.ConfigItem(
-            name="path",
-            prompt_text="ABC Path",
-            initial_value=".",
+            name="number", prompt_text="XYZ Number", initial_value="", value_type=int
         ),
-        appconfigpy.ConfigItem(
-            name="number",
-            prompt_text="XYZ Number",
-            initial_value="",
-            value_type=int,
-        ),
-    ])
+    ],
+)
