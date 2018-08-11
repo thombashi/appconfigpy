@@ -64,7 +64,7 @@ setuptools.setup(
     tests_require=[],
     extras_require={
         "build": "wheel",
-        "release": "releasecmd>=0.0.9",
+        "release": "releasecmd>=0.0.11",
     },
 
     classifiers=[
