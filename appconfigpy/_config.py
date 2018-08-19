@@ -7,12 +7,12 @@
 from __future__ import absolute_import, unicode_literals
 
 import io
-import json
 import os.path
 import sys
 
 import msgfy
 import pathvalidate
+import simplejson as json
 import six
 import typepy
 
