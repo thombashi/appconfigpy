@@ -5,7 +5,7 @@ appconfigpy
     :target: https://badge.fury.io/py/appconfigpy
 
 .. image:: https://img.shields.io/pypi/pyversions/appconfigpy.svg
-    :target: https://pypi.python.org/pypi/appconfigpy
+    :target: https://pypi.org/project/appconfigpy
 
 
 Summary
@@ -101,11 +101,11 @@ Dependencies
 ============
 Python 2.7+ or 3.4+
 
-- `logbook <http://logbook.readthedocs.io/en/stable/>`__
+- `logbook <https://logbook.readthedocs.io/en/stable/>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
-- `six <https://pypi.python.org/pypi/six/>`__
+- `six <https://pypi.org/project/six/>`__
 - `typepy <https://github.com/thombashi/typepy>`__
 
 Optional Dependencies
