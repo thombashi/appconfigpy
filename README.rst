@@ -104,10 +104,10 @@ Python 2.7+ or 3.4+
 - `logbook <https://logbook.readthedocs.io/en/stable/>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
-- `simplejson <https://github.com/simplejson/simplejson>`__
 - `six <https://pypi.org/project/six/>`__
 - `typepy <https://github.com/thombashi/typepy>`__
 
 Optional Dependencies
 ------------------------------------
 - `click <https://github.com/pallets/click>`__
+- `simplejson <https://github.com/simplejson/simplejson>`__
