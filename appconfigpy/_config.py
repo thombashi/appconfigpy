@@ -12,12 +12,18 @@ import sys
 
 import msgfy
 import pathvalidate
-import simplejson as json
 import six
 import typepy
 
 from ._const import NULL_VALUE
 from ._logger import logger
+
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
 
 
 class DefaultDisplayStyle(object):
