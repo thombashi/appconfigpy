@@ -25,7 +25,6 @@ except ImportError:
     import json
 
 
-
 class DefaultDisplayStyle(object):
     VISIBLE = "VISIBLE"
     PART_VISIBLE = "PART_VISIBLE"
