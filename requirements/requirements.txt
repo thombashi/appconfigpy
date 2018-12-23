@@ -1,5 +1,5 @@
 logbook>=1.1.0
-msgfy>=0.0.3
+msgfy>=0.0.4
+typepy>=0.3.0
 six
-typepy>=0.2.4
-pathvalidate>=0.21.3
+pathvalidate>=0.22.0
