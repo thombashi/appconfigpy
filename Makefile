@@ -1,5 +1,6 @@
 .PHONY: build
 build:
+	@make clean
 	@python setup.py build
 	@rm -rf build/
 
