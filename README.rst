@@ -3,6 +3,7 @@ appconfigpy
 
 .. image:: https://badge.fury.io/py/appconfigpy.svg
     :target: https://badge.fury.io/py/appconfigpy
+    :alt: PyPI package version
 
 .. image:: https://img.shields.io/pypi/pyversions/appconfigpy.svg
     :target: https://pypi.org/project/appconfigpy
