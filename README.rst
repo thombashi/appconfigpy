@@ -7,6 +7,7 @@ appconfigpy
 
 .. image:: https://img.shields.io/pypi/pyversions/appconfigpy.svg
     :target: https://pypi.org/project/appconfigpy
+    :alt: Supported Python versions
 
 
 Summary
@@ -16,7 +17,6 @@ A Python library to create/load an application configuration file.
 
 Installation
 ============
-
 ::
 
     pip install appconfigpy
@@ -25,32 +25,29 @@ Installation
 Usage
 =====
 
-Create A Configuration File
-------------------------------------
+Create a configuration file from user inputs
+-------------------------------------------------------
 .. code:: python
 
     # configure.py
 
-    import appconfigpy
+    from appconfigpy import ConfigItem, ConfigManager, DefaultDisplayStyle
 
-    app_config_manager = appconfigpy.ConfigManager(
+    app_config_mgr = ConfigManager(
         config_name="example",
         config_item_list=[
-            appconfigpy.ConfigItem(
+            ConfigItem(
                 name="token",
                 initial_value=None,
                 prompt_text="API Token",
-                default_display_style=appconfigpy.DefaultDisplayStyle.PART_VISIBLE
+                default_display_style=DefaultDisplayStyle.PART_VISIBLE,
             ),
-            appconfigpy.ConfigItem(
-                name="path",
-                prompt_text="Path",
-                initial_value=".",
-            ),
-        ])
+            ConfigItem(name="path", prompt_text="ABC Path", initial_value="."),
+        ],
+    )
 
     try:
-        app_config_manager.configure()
+        app_config_mgr.configure()
     except KeyboardInterrupt:
         print()
 
@@ -59,38 +56,35 @@ Create A Configuration File
 
     $ ./configure.py
     API Token: abcdefghijklmn
-    Path [.]:
+    ABC Path [.]:
     $ cat ~/.example
     {
         "path": ".",
         "token": "abcdefghijklmn"
     }
 
-Load A Configuration File
-------------------------------------
+Load a configuration file
+-------------------------------------------------------
 .. code:: python
 
     # load.py
 
-    import appconfigpy
+    from appconfigpy import ConfigItem, ConfigManager, DefaultDisplayStyle
 
-    app_config_manager = appconfigpy.ConfigManager(
+    app_config_mgr = ConfigManager(
         config_name="example",
         config_item_list=[
-            appconfigpy.ConfigItem(
+            ConfigItem(
                 name="token",
                 initial_value=None,
                 prompt_text="API Token",
-                default_display_style=appconfigpy.DefaultDisplayStyle.PART_VISIBLE
+                default_display_style=DefaultDisplayStyle.PART_VISIBLE,
             ),
-            appconfigpy.ConfigItem(
-                name="path",
-                prompt_text="Path",
-                initial_value=".",
-            ),
-        ])
+            ConfigItem(name="path", prompt_text="ABC Path", initial_value="."),
+        ],
+    )
 
-    print(app_config_manager.load())
+    print(app_config_mgr.load())
 
 .. code::
 
@@ -102,13 +96,12 @@ Dependencies
 ============
 Python 2.7+ or 3.4+
 
-- `logbook <https://logbook.readthedocs.io/en/stable/>`__
-- `msgfy <https://github.com/thombashi/msgfy>`__
-- `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `six <https://pypi.org/project/six/>`__
-- `typepy <https://github.com/thombashi/typepy>`__
 
 Optional Dependencies
 ------------------------------------
 - `click <https://github.com/pallets/click>`__
+- `logbook <https://logbook.readthedocs.io/en/stable/>`__
+- `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
+- `typepy <https://github.com/thombashi/typepy>`__
