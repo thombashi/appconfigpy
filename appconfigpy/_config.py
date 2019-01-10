@@ -95,11 +95,7 @@ class ConfigManager(object):
             return {}
 
         with open(self.config_file_path) as f:
-            try:
-                loaded_config = json.load(f)
-            except ValueError as e:
-                self.__logger.debug(msgfy.to_debug_message(e))
-                return {}
+            loaded_config = json.load(f)
 
         self.__logger.debug(
             "config file loaded: path='{}', entries={}".format(
