@@ -6,14 +6,31 @@
 
 from __future__ import absolute_import, unicode_literals
 
-import logbook
 
+try:
+    import logbook
 
-logger = logbook.Logger("appconfigpy")
-logger.disable()
+    LOGBOOK_INSTALLED = True
+
+    logger = logbook.Logger("appconfigpy")
+    logger.disable()
+except ImportError:
+    LOGBOOK_INSTALLED = False
+
+    class DummyLogger(object):
+        def debug(self, *args, **kwargs):
+            pass
+
+        def error(self, *args, **kwargs):
+            pass
+
+    logger = DummyLogger()
 
 
 def set_logger(is_enable):
+    if not LOGBOOK_INSTALLED:
+        return
+
     if is_enable:
         logger.enable()
     else:
@@ -30,6 +47,9 @@ def set_log_level(log_level):
         `logbook <https://logbook.readthedocs.io/en/stable/api/base.html>`__.
         Disabled logging if ``log_level`` is ``logbook.NOTSET``.
     """
+
+    if not LOGBOOK_INSTALLED:
+        return
 
     if log_level == logbook.NOTSET:
         set_logger(is_enable=False)
