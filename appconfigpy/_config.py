@@ -13,7 +13,6 @@ import sys
 
 import msgfy
 import six
-import typepy
 
 from ._const import NULL_VALUE
 from ._logger import logger
@@ -46,7 +45,12 @@ class ConfigItem(object):
         prompt_text=None,
         default_display_style=DefaultDisplayStyle.VISIBLE,
     ):
-        typepy.type.String(name).validate()
+        try:
+            import typepy
+
+            typepy.type.String(name).validate()
+        except ImportError:
+            pass
 
         if default_display_style not in DefaultDisplayStyle.LIST:
             raise ValueError(
