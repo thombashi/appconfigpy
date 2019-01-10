@@ -86,7 +86,7 @@ class ConfigManager(object):
         self.__config_file_path = os.path.normpath(
             os.path.expanduser(os.path.join("~", ".{:s}".format(config_name.lstrip("."))))
         )
-        self.__config_item_list = config_item_list
+        self.__config_items = config_item_list
 
     def load(self):
         if not os.path.isfile(self.config_file_path):
@@ -103,7 +103,7 @@ class ConfigManager(object):
         )
 
         valid_configs = {}
-        for config_item in self.__config_item_list:
+        for config_item in self.__config_items:
             if config_item.config_name not in loaded_config:
                 continue
 
@@ -119,7 +119,7 @@ class ConfigManager(object):
         old_config = self.load()
         new_config = {}
 
-        for config_item in self.__config_item_list:
+        for config_item in self.__config_items:
             old_value = old_config.get(config_item.config_name, config_item.initial_value)
             prompt_text = config_item.prompt_text
             if all(
@@ -139,7 +139,7 @@ class ConfigManager(object):
                 self.__logger.debug("keyboard interrupt")
                 return errno.EINTR
 
-        self.__logger.debug("written {} configurations".format(len(self.__config_item_list)))
+        self.__logger.debug("written {} configurations".format(len(self.__config_items)))
 
         return self.__write_config(new_config)
 
