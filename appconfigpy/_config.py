@@ -85,7 +85,7 @@ class ConfigManager(object):
 
         self.__logger = logger
         self.__config_file_path = os.path.normpath(
-            os.path.expanduser(os.path.join("~", ".{:s}".format(config_name)))
+            os.path.expanduser(os.path.join("~", ".{:s}".format(config_name.lstrip("."))))
         )
         self.__config_item_list = config_item_list
 
