@@ -5,23 +5,21 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
+from __future__ import unicode_literals
 
-import appconfigpy
+from appconfigpy import ConfigItem, ConfigManager, DefaultDisplayStyle
 
 
-app_config_manager = appconfigpy.ConfigManager(
+app_config_mgr = ConfigManager(
     config_name="example",
     config_item_list=[
-        appconfigpy.ConfigItem(
+        ConfigItem(
             name="token",
             initial_value=None,
             prompt_text="API Token",
-            default_display_style=appconfigpy.DefaultDisplayStyle.PART_VISIBLE,
+            default_display_style=DefaultDisplayStyle.PART_VISIBLE,
         ),
-        appconfigpy.ConfigItem(name="path", prompt_text="ABC Path", initial_value="."),
-        appconfigpy.ConfigItem(
-            name="number", prompt_text="XYZ Number", initial_value="", value_type=int
-        ),
+        ConfigItem(name="path", prompt_text="ABC Path", initial_value="."),
+        ConfigItem(name="number", prompt_text="XYZ Number", initial_value="", value_type=int),
     ],
 )
