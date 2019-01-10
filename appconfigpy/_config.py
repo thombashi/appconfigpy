@@ -91,9 +91,7 @@ class ConfigManager(object):
 
     def load(self):
         if not os.path.isfile(self.config_file_path):
-            self.__logger.debug(
-                "configuration file not found: path='{}'".format(self.config_file_path)
-            )
+            self.__logger.debug("config file not found: path='{}'".format(self.config_file_path))
             return {}
 
         with open(self.config_file_path) as f:
@@ -104,7 +102,7 @@ class ConfigManager(object):
                 return {}
 
         self.__logger.debug(
-            "configuration file found: path='{}', loaded-entries={}".format(
+            "config file loaded: path='{}', entries={}".format(
                 self.config_file_path, len(loaded_config)
             )
         )
@@ -116,7 +114,9 @@ class ConfigManager(object):
 
             valid_configs[config_item.config_name] = loaded_config.get(config_item.config_name)
 
-        self.__logger.debug("valid loaded configurations: {}".format(len(valid_configs)))
+        self.__logger.debug(
+            "valid loaded configurations: {}/{}".format(len(valid_configs), len(loaded_config))
+        )
 
         return valid_configs
 
