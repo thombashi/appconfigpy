@@ -75,7 +75,9 @@ class ConfigManager(object):
         pathvalidate.validate_filename(config_name)
 
         self.__logger = logger
-        self.__config_file_path = os.path.expanduser(os.path.join("~", ".{:s}".format(config_name)))
+        self.__config_file_path = os.path.normpath(
+            os.path.expanduser(os.path.join("~", ".{:s}".format(config_name)))
+        )
         self.__config_item_list = config_item_list
 
     def load(self):
