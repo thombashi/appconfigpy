@@ -11,7 +11,6 @@ import io
 import os.path
 import sys
 
-import msgfy
 import six
 
 from ._const import NULL_VALUE
@@ -191,7 +190,8 @@ class ConfigManager(object):
             with io.open(self.config_file_path, "w", encoding="utf8") as f:
                 f.write(json.dumps(config, indent=4, ensure_ascii=False) + "\n")
         except IOError as e:
-            self.__logger.error(msgfy.to_error_message(e))
+            self.__logger.error(e)
+
             return e.args[0]
 
         self.__logger.debug("written configurations to '{:s}'".format(self.config_file_path))
