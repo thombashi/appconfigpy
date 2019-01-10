@@ -98,16 +98,16 @@ class ConfigManager(object):
             )
         )
 
-        valid_config = {}
+        valid_configs = {}
         for config_item in self.__config_item_list:
             if config_item.config_name not in loaded_config:
                 continue
 
-            valid_config[config_item.config_name] = loaded_config.get(config_item.config_name)
+            valid_configs[config_item.config_name] = loaded_config.get(config_item.config_name)
 
-        self.__logger.debug("valid loaded configurations: {}".format(len(valid_config)))
+        self.__logger.debug("valid loaded configurations: {}".format(len(valid_configs)))
 
-        return valid_config
+        return valid_configs
 
     def configure(self):
         old_config = self.load()
