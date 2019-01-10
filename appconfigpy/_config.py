@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, unicode_literals
 
+import errno
 import io
 import os.path
 import sys
@@ -131,9 +132,13 @@ class ConfigManager(object):
             ):
                 prompt_text += " [{}]".format("*" * 10 + six.text_type(old_value)[-4:])
 
-            new_config[config_item.config_name] = self.__prompt_value(
-                prompt_text, old_value, config_item
-            )
+            try:
+                new_config[config_item.config_name] = self.__prompt_value(
+                    prompt_text, old_value, config_item
+                )
+            except KeyboardInterrupt:
+                self.__logger.debug("keyboard interrupt")
+                return errno.EINTR
 
         self.__logger.debug("written {} configurations".format(len(self.__config_item_list)))
 
