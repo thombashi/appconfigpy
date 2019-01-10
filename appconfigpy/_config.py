@@ -11,7 +11,6 @@ import os.path
 import sys
 
 import msgfy
-import pathvalidate
 import six
 import typepy
 
@@ -72,7 +71,12 @@ class ConfigManager(object):
         return os.path.exists(self.__config_file_path)
 
     def __init__(self, config_name, config_item_list):
-        pathvalidate.validate_filename(config_name)
+        try:
+            import pathvalidate
+
+            pathvalidate.validate_filename(config_name)
+        except ImportError:
+            pass
 
         self.__logger = logger
         self.__config_file_path = os.path.normpath(
