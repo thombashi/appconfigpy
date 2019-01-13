@@ -98,23 +98,23 @@ class ConfigManager(object):
             return {}
 
         with open(self.config_filepath) as f:
-            loaded_config = json.load(f)
+            loaded_configs = json.load(f)
 
         self.__logger.debug(
             "config file loaded: path='{}', entries={}".format(
-                self.config_filepath, len(loaded_config)
+                self.config_filepath, len(loaded_configs)
             )
         )
 
         valid_configs = {}
         for config_item in self.__config_items:
-            if config_item.config_name not in loaded_config:
+            if config_item.config_name not in loaded_configs:
                 continue
 
-            valid_configs[config_item.config_name] = loaded_config.get(config_item.config_name)
+            valid_configs[config_item.config_name] = loaded_configs.get(config_item.config_name)
 
         self.__logger.debug(
-            "valid loaded configurations: {}/{}".format(len(valid_configs), len(loaded_config))
+            "valid loaded configurations: {}/{}".format(len(valid_configs), len(loaded_configs))
         )
 
         return valid_configs
