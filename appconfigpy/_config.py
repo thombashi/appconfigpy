@@ -68,11 +68,11 @@ class ConfigItem(object):
 class ConfigManager(object):
     @property
     def config_file_path(self):
-        return self.__config_file_path
+        return self.__config_filepath
 
     @property
     def exists(self):
-        return os.path.exists(self.__config_file_path)
+        return os.path.exists(self.__config_filepath)
 
     def __init__(self, config_name, config_item_list):
         try:
@@ -83,7 +83,7 @@ class ConfigManager(object):
             pass
 
         self.__logger = logger
-        self.__config_file_path = os.path.normpath(
+        self.__config_filepath = os.path.normpath(
             os.path.expanduser(os.path.join("~", ".{:s}".format(config_name.lstrip("."))))
         )
         self.__config_items = config_item_list
