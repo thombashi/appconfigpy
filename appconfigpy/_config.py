@@ -67,6 +67,10 @@ class ConfigItem(object):
 
 class ConfigManager(object):
     @property
+    def config_filepath(self):
+        return self.__config_filepath
+
+    @property
     def config_file_path(self):
         return self.__config_filepath
 
@@ -89,16 +93,16 @@ class ConfigManager(object):
         self.__config_items = config_item_list
 
     def load(self):
-        if not os.path.isfile(self.config_file_path):
-            self.__logger.debug("config file not found: path='{}'".format(self.config_file_path))
+        if not os.path.isfile(self.config_filepath):
+            self.__logger.debug("config file not found: path='{}'".format(self.config_filepath))
             return {}
 
-        with open(self.config_file_path) as f:
+        with open(self.config_filepath) as f:
             loaded_config = json.load(f)
 
         self.__logger.debug(
             "config file loaded: path='{}', entries={}".format(
-                self.config_file_path, len(loaded_config)
+                self.config_filepath, len(loaded_config)
             )
         )
 
@@ -187,13 +191,13 @@ class ConfigManager(object):
 
     def __write_config(self, config):
         try:
-            with io.open(self.config_file_path, "w", encoding="utf8") as f:
+            with io.open(self.config_filepath, "w", encoding="utf8") as f:
                 f.write(json.dumps(config, indent=4, ensure_ascii=False) + "\n")
         except IOError as e:
             self.__logger.error(e)
 
             return e.args[0]
 
-        self.__logger.debug("written configurations to '{:s}'".format(self.config_file_path))
+        self.__logger.debug("written configurations to '{:s}'".format(self.config_filepath))
 
         return 0
