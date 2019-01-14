@@ -43,6 +43,7 @@ class ConfigItem(object):
         value_type=str,
         prompt_text=None,
         default_display_style=DefaultDisplayStyle.VISIBLE,
+        required=False,
     ):
         try:
             import typepy
@@ -63,6 +64,7 @@ class ConfigItem(object):
         self.initial_value = initial_value
         self.prompt_text = prompt_text if prompt_text else name
         self.default_display_style = default_display_style
+        self.required = required
 
 
 class ConfigManager(object):
@@ -107,8 +109,13 @@ class ConfigManager(object):
         )
 
         valid_configs = {}
+        invalid_configs = []
+
         for config_item in self.__config_items:
             if config_item.config_name not in loaded_configs:
+                if config_item.required:
+                    invalid_configs.append(config_item.config_name)
+
                 continue
 
             valid_configs[config_item.config_name] = loaded_configs.get(config_item.config_name)
@@ -116,6 +123,9 @@ class ConfigManager(object):
         self.__logger.debug(
             "valid loaded configurations: {}/{}".format(len(valid_configs), len(loaded_configs))
         )
+
+        if invalid_configs:
+            raise ValueError("required configs not found: {}".format("".join(invalid_configs)))
 
         return valid_configs
 
