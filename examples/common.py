@@ -18,8 +18,11 @@ app_config_mgr = ConfigManager(
             initial_value=None,
             prompt_text="API Token",
             default_display_style=DefaultDisplayStyle.PART_VISIBLE,
+            required=True
         ),
         ConfigItem(name="path", prompt_text="ABC Path", initial_value="."),
-        ConfigItem(name="number", prompt_text="XYZ Number", initial_value="", value_type=int),
+        ConfigItem(
+            name="number", prompt_text="XYZ Number", initial_value="", value_type=int, required=True
+        ),
     ],
 )
