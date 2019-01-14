@@ -1,5 +1,12 @@
-appconfigpy
-===============
+.. contents:: **appconfigpy**
+   :backlinks: top
+   :local:
+
+
+Summary
+=======
+A Python library to create/load an application configuration file.
+
 
 .. image:: https://badge.fury.io/py/appconfigpy.svg
     :target: https://badge.fury.io/py/appconfigpy
@@ -8,11 +15,6 @@ appconfigpy
 .. image:: https://img.shields.io/pypi/pyversions/appconfigpy.svg
     :target: https://pypi.org/project/appconfigpy
     :alt: Supported Python versions
-
-
-Summary
-=======
-A Python library to create/load an application configuration file.
 
 
 Installation
@@ -102,6 +104,7 @@ Optional Dependencies
 ------------------------------------
 - `click <https://github.com/pallets/click>`__
 - `logbook <https://logbook.readthedocs.io/en/stable/>`__
+    - Logging using logbook if the package installed
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - `typepy <https://github.com/thombashi/typepy>`__
