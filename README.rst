@@ -48,10 +48,7 @@ Create a configuration file from user inputs
         ],
     )
 
-    try:
-        app_config_mgr.configure()
-    except KeyboardInterrupt:
-        print()
+    app_config_mgr.configure()
 
 
 .. code::
