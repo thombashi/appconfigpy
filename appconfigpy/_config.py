@@ -94,18 +94,19 @@ class ConfigManager(object):
         )
         self.__config_items = config_item_list
 
-    def load(self):
-        if not os.path.isfile(self.config_filepath):
-            self.__logger.debug("config file not found: path='{}'".format(self.config_filepath))
+    def load(self, config_filepath=None):
+        if not config_filepath:
+            config_filepath = self.config_filepath
+
+        if not os.path.isfile(config_filepath):
+            self.__logger.debug("config file not found: path='{}'".format(config_filepath))
             return {}
 
-        with open(self.config_filepath) as f:
+        with open(config_filepath) as f:
             loaded_configs = json.load(f)
 
         self.__logger.debug(
-            "config file loaded: path='{}', entries={}".format(
-                self.config_filepath, len(loaded_configs)
-            )
+            "config file loaded: path='{}', entries={}".format(config_filepath, len(loaded_configs))
         )
 
         valid_configs = {}
