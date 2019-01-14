@@ -137,6 +137,10 @@ class ConfigManager(object):
         for config_item in self.__config_items:
             old_value = old_config.get(config_item.config_name, config_item.initial_value)
             prompt_text = config_item.prompt_text
+
+            if config_item.required:
+                prompt_text += " (required)"
+
             if all(
                 [
                     old_value,
@@ -147,9 +151,15 @@ class ConfigManager(object):
                 prompt_text += " [{}]".format("*" * 10 + six.text_type(old_value)[-4:])
 
             try:
-                new_config[config_item.config_name] = self.__prompt_value(
-                    prompt_text, old_value, config_item
-                )
+                while True:
+                    new_value = self.__prompt_value(prompt_text, old_value, config_item)
+                    new_config[config_item.config_name] = new_value
+
+                    if not config_item.required:
+                        break
+
+                    if new_value:
+                        break
             except KeyboardInterrupt:
                 self.__logger.debug("keyboard interrupt")
                 return errno.EINTR
