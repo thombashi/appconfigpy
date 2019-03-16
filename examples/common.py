@@ -18,7 +18,7 @@ app_config_mgr = ConfigManager(
             initial_value=None,
             prompt_text="API Token",
             default_display_style=DefaultDisplayStyle.PART_VISIBLE,
-            required=True
+            required=True,
         ),
         ConfigItem(name="path", prompt_text="ABC Path", initial_value="."),
         ConfigItem(
