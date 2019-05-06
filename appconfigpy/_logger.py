@@ -7,13 +7,20 @@
 from __future__ import absolute_import, unicode_literals
 
 
+def _disable_logger(l):
+    try:
+        l.disable()
+    except AttributeError:
+        l.disabled = True  # to support Logbook<1.0.0
+
+
 try:
     import logbook
 
     LOGBOOK_INSTALLED = True
 
     logger = logbook.Logger("appconfigpy")
-    logger.disable()
+    _disable_logger(logger)
 except ImportError:
     LOGBOOK_INSTALLED = False
 
@@ -32,9 +39,12 @@ def set_logger(is_enable):
         return
 
     if is_enable:
-        logger.enable()
+        try:
+            logger.enable()
+        except AttributeError:
+            logger.disabled = False  # to support Logbook<1.0.0
     else:
-        logger.disable()
+        _disable_logger(logger)
 
 
 def set_log_level(log_level):
