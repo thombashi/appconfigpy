@@ -16,6 +16,9 @@ A Python library to create/load an application configuration file.
     :target: https://pypi.org/project/appconfigpy
     :alt: Supported Python versions
 
+.. image:: https://img.shields.io/pypi/implementation/appconfigpy.svg
+    :target: https://pypi.org/project/appconfigpy
+    :alt: Supported Python implementations
 
 Installation
 ============
@@ -48,7 +51,7 @@ Create a configuration file from user inputs
 
     app_config_mgr = ConfigManager(
         config_name="example",
-        config_item_list=[
+        config_items=[
             ConfigItem(
                 name="token",
                 initial_value=None,
@@ -83,7 +86,7 @@ Load a configuration file
 
     app_config_mgr = ConfigManager(
         config_name="example",
-        config_item_list=[
+        config_items=[
             ConfigItem(
                 name="token",
                 initial_value=None,
@@ -104,15 +107,13 @@ Load a configuration file
 
 Dependencies
 ============
-Python 2.7+ or 3.5+
-
-- `six <https://pypi.org/project/six/>`__
+Python 3.5+
 
 Optional Dependencies
 ------------------------------------
-- `click <https://github.com/pallets/click>`__
-- `logbook <https://logbook.readthedocs.io/en/stable/>`__
-    - Logging using logbook if the package installed
+- `click <https://palletsprojects.com/p/click/>`__
+- `loguru <https://github.com/Delgan/loguru>`__
+    - Used for logging if the package installed
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - `typepy <https://github.com/thombashi/typepy>`__
