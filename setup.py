@@ -59,7 +59,7 @@ setuptools.setup(
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     install_requires=install_requires,
     tests_require=tests_requires,
-    extras_require={"logging": ["Logbook>=0.12.3,<2.0.0"], "test": tests_requires,},
+    extras_require={"logging": ["loguru>=0.4.1,<1"], "test": tests_requires,},
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
