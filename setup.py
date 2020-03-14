@@ -42,8 +42,6 @@ with io.open(os.path.join(REQUIREMENT_DIR, "requirements.txt"), encoding=ENCODIN
 with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
     tests_requires = [line.strip() for line in f if line.strip()]
 
-SETUPTOOLS_REQUIRES = ["setuptools>=38.3.0"]
-
 setuptools.setup(
     name=MODULE_NAME,
     version=pkg_info["__version__"],
@@ -64,7 +62,7 @@ setuptools.setup(
     },
 
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
-    install_requires=SETUPTOOLS_REQUIRES + install_requires,
+    install_requires=install_requires,
     tests_require=tests_requires,
     extras_require={
         "build": ["twine", "wheel"],
