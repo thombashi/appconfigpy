@@ -5,6 +5,7 @@ from __future__ import print_function, unicode_literals
 from textwrap import dedent
 
 import pytest
+
 from appconfigpy import ConfigItem, ConfigManager, DefaultDisplayStyle
 
 
