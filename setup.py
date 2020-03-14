@@ -62,6 +62,7 @@ setuptools.setup(
     keywords=["configuration"],
     license=pkg_info["__license__"],
     long_description=long_description,
+    long_description_content_type="text/x-rst",
     packages=setuptools.find_packages(exclude=["test*"]),
     project_urls={
         "Source": REPOSITORY_URL,
