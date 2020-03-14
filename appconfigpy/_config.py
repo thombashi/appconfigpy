@@ -1,17 +1,10 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
-
 import errno
-import io
 import os.path
 import sys
-
-import six
 
 from ._const import NULL_VALUE
 from ._logger import logger
@@ -23,7 +16,7 @@ except ImportError:
     import json  # type: ignore
 
 
-class DefaultDisplayStyle(object):
+class DefaultDisplayStyle:
     VISIBLE = "VISIBLE"
     PART_VISIBLE = "PART_VISIBLE"
     HIDDEN = "HIDDEN"
@@ -31,7 +24,7 @@ class DefaultDisplayStyle(object):
     LIST = [VISIBLE, PART_VISIBLE, HIDDEN]
 
 
-class ConfigItem(object):
+class ConfigItem:
     @property
     def show_default(self):
         return self.default_display_style == DefaultDisplayStyle.VISIBLE
@@ -67,7 +60,7 @@ class ConfigItem(object):
         self.required = required
 
 
-class ConfigManager(object):
+class ConfigManager:
     @property
     def config_filepath(self):
         return self.__config_filepath
@@ -148,7 +141,7 @@ class ConfigManager(object):
                     config_item.default_display_style == DefaultDisplayStyle.PART_VISIBLE,
                 ]
             ):
-                prompt_text += " [{}]".format("*" * 10 + six.text_type(old_value)[-4:])
+                prompt_text += " [{}]".format("*" * 10 + str(old_value)[-4:])
 
             try:
                 while True:
@@ -182,8 +175,6 @@ class ConfigManager(object):
             raise KeyboardInterrupt()
 
     def __prompt_value_builtin(self, prompt_text, current_value, config_item):
-        from six.moves import input
-
         if config_item.show_default:
             prompt_text = "{:s} [{}]: ".format(prompt_text, current_value)
         else:
@@ -212,9 +203,9 @@ class ConfigManager(object):
 
     def __write_config(self, config):
         try:
-            with io.open(self.config_filepath, "w", encoding="utf8") as f:
+            with open(self.config_filepath, "w", encoding="utf8") as f:
                 f.write(json.dumps(config, indent=4, ensure_ascii=False) + "\n")
-        except IOError as e:
+        except OSError as e:
             self.__logger.error(e)
 
             return e.args[0]

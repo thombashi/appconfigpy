@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import print_function, unicode_literals
-
 from textwrap import dedent
 
 import pytest
@@ -25,7 +21,7 @@ config_mgr = ConfigManager(
 )
 
 
-class Test_load(object):
+class Test_load:
     @pytest.mark.parametrize(
         ["value", "expected"],
         [
