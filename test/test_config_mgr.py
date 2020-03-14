@@ -7,7 +7,7 @@ from appconfigpy import ConfigItem, ConfigManager, DefaultDisplayStyle
 
 config_mgr = ConfigManager(
     config_name="example",
-    config_item_list=[
+    config_items=[
         ConfigItem(
             name="token",
             initial_value=None,

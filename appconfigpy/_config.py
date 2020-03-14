@@ -73,7 +73,7 @@ class ConfigManager:
     def exists(self):
         return os.path.exists(self.__config_filepath)
 
-    def __init__(self, config_name, config_item_list):
+    def __init__(self, config_name, config_items):
         try:
             import pathvalidate
 
@@ -85,7 +85,7 @@ class ConfigManager:
         self.__config_filepath = os.path.normpath(
             os.path.expanduser(os.path.join("~", ".{:s}".format(config_name.lstrip("."))))
         )
-        self.__config_items = config_item_list
+        self.__config_items = config_items
 
     def load(self, config_filepath=None):
         if not config_filepath:
