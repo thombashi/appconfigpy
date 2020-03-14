@@ -5,6 +5,7 @@
 import errno
 import os.path
 import sys
+from typing import Any, Dict, Optional, Sequence
 
 from ._const import NULL_VALUE
 from ._logger import logger
@@ -26,17 +27,17 @@ class DefaultDisplayStyle:
 
 class ConfigItem:
     @property
-    def show_default(self):
+    def show_default(self) -> bool:
         return self.default_display_style == DefaultDisplayStyle.VISIBLE
 
     def __init__(
         self,
-        name,
-        initial_value,
+        name: str,
+        initial_value: Any,
         value_type=str,
-        prompt_text=None,
-        default_display_style=DefaultDisplayStyle.VISIBLE,
-        required=False,
+        prompt_text: Optional[str] = None,
+        default_display_style: str = DefaultDisplayStyle.VISIBLE,
+        required: bool = False,
     ):
         try:
             import typepy
@@ -62,7 +63,7 @@ class ConfigItem:
 
 class ConfigManager:
     @property
-    def config_filepath(self):
+    def config_filepath(self) -> str:
         return self.__config_filepath
 
     @property
@@ -70,10 +71,10 @@ class ConfigManager:
         return self.__config_filepath
 
     @property
-    def exists(self):
+    def exists(self) -> bool:
         return os.path.exists(self.__config_filepath)
 
-    def __init__(self, config_name, config_items):
+    def __init__(self, config_name: str, config_items: Sequence[ConfigItem]) -> None:
         try:
             import pathvalidate
 
@@ -87,7 +88,7 @@ class ConfigManager:
         )
         self.__config_items = config_items
 
-    def load(self, config_filepath=None):
+    def load(self, config_filepath: Optional[str] = None) -> Dict[str, Any]:
         if not config_filepath:
             config_filepath = self.config_filepath
 
@@ -123,7 +124,7 @@ class ConfigManager:
 
         return valid_configs
 
-    def configure(self):
+    def configure(self) -> int:
         old_config = self.load()
         new_config = {}
 
@@ -161,7 +162,9 @@ class ConfigManager:
 
         return self.__write_config(new_config)
 
-    def __prompt_value_click(self, prompt_text, current_value, config_item):
+    def __prompt_value_click(
+        self, prompt_text: str, current_value: Any, config_item: ConfigItem
+    ) -> Any:
         import click
 
         try:
@@ -174,7 +177,9 @@ class ConfigManager:
         except click.exceptions.Abort:
             raise KeyboardInterrupt()
 
-    def __prompt_value_builtin(self, prompt_text, current_value, config_item):
+    def __prompt_value_builtin(
+        self, prompt_text: str, current_value: Any, config_item: ConfigItem
+    ) -> Any:
         if config_item.show_default:
             prompt_text = "{:s} [{}]: ".format(prompt_text, current_value)
         else:
@@ -182,7 +187,7 @@ class ConfigManager:
 
         return config_item.value_type(input(prompt_text))
 
-    def __prompt_value(self, prompt_text, current_value, config_item):
+    def __prompt_value(self, prompt_text: str, current_value: Any, config_item: ConfigItem) -> Any:
         try:
             return self.__prompt_value_click(prompt_text, current_value, config_item)
         except ImportError:
@@ -201,7 +206,7 @@ class ConfigManager:
 
         return new_value
 
-    def __write_config(self, config):
+    def __write_config(self, config: Dict[str, Any]) -> int:
         try:
             with open(self.config_filepath, "w", encoding="utf8") as f:
                 f.write(json.dumps(config, indent=4, ensure_ascii=False) + "\n")
