@@ -52,19 +52,15 @@ class Test_load:
         ],
     )
     def test_normal(self, tmpdir, value, expected):
-        config_filepath = str(tmpdir.join(".config"))
-        with open(config_filepath, "w") as f:
-            f.write(value)
-            f.flush()
+        config_filepath = tmpdir.join(".config")
+        config_filepath.write(value)
 
         assert config_mgr.load(config_filepath) == expected
 
     @pytest.mark.parametrize(["value", "expected"], [["{}", ValueError]])
     def test_exception(self, tmpdir, value, expected):
-        config_filepath = str(tmpdir.join(".config"))
-        with open(config_filepath, "w") as f:
-            f.write(value)
-            f.flush()
+        config_filepath = tmpdir.join(".config")
+        config_filepath.write(value)
 
         with pytest.raises(expected):
             config_mgr.load(config_filepath)
