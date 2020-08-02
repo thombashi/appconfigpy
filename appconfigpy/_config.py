@@ -5,7 +5,7 @@
 import errno
 import os.path
 import sys
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, Mapping, Optional, Sequence
 
 from ._const import NULL_VALUE
 from ._logger import logger
@@ -206,7 +206,7 @@ class ConfigManager:
 
         return new_value
 
-    def __write_config(self, config: Dict[str, Any]) -> int:
+    def __write_config(self, config: Mapping[str, Any]) -> int:
         try:
             with open(self.config_filepath, "w", encoding="utf8") as f:
                 f.write(json.dumps(config, indent=4, ensure_ascii=False) + "\n")
