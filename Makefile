@@ -21,5 +21,10 @@ fmt:
 
 .PHONY: release
 release:
-	@tox -e release
+	@python setup.py release --sign
 	@rm -rf dist/
+
+.PHONY: setup
+setup:
+	@pip install --upgrade -e .[test] releasecmd tox
+	pip check
