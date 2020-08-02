@@ -115,5 +115,4 @@ Optional Dependencies
 - `loguru <https://github.com/Delgan/loguru>`__
     - Used for logging if the package installed
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
-- `simplejson <https://github.com/simplejson/simplejson>`__
 - `typepy <https://github.com/thombashi/typepy>`__
