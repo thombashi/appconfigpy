@@ -18,12 +18,10 @@ except ImportError:
     import json
 
 
-class DefaultDisplayStyle:
+class DefaultDisplayStyle(enum.Enum):
     VISIBLE = "VISIBLE"
     PART_VISIBLE = "PART_VISIBLE"
     HIDDEN = "HIDDEN"
-
-    LIST = [VISIBLE, PART_VISIBLE, HIDDEN]
 
 
 @dataclass(frozen=True)
@@ -38,7 +36,7 @@ class ConfigItem:
         initial_value: Any,
         value_type=str,
         prompt_text: Optional[str] = None,
-        default_display_style: str = DefaultDisplayStyle.VISIBLE,
+        default_display_style: DefaultDisplayStyle = DefaultDisplayStyle.VISIBLE,
         required: bool = False,
     ):
         try:
@@ -48,12 +46,8 @@ class ConfigItem:
         except ImportError:
             pass
 
-        if default_display_style not in DefaultDisplayStyle.LIST:
-            raise ValueError(
-                "invalid style: expected={}, actual={}".format(
-                    DefaultDisplayStyle.LIST, default_display_style
-                )
-            )
+        if default_display_style not in DefaultDisplayStyle:
+            raise ValueError(f"invalid display style: actual={default_display_style}")
 
         self.config_name = name
         self.value_type = value_type
