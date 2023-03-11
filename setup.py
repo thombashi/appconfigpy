@@ -51,7 +51,10 @@ setuptools.setup(
     long_description_content_type="text/x-rst",
     packages=setuptools.find_packages(exclude=["test*"]),
     package_data={MODULE_NAME: ["py.typed"]},
-    project_urls={"Source": REPOSITORY_URL, "Tracker": f"{REPOSITORY_URL:s}/issues"},
+    project_urls={
+        "Source": REPOSITORY_URL,
+        "Tracker": f"{REPOSITORY_URL:s}/issues",
+    },
     python_requires=">=3.6",
     install_requires=install_requires,
     tests_require=tests_requires,

@@ -200,9 +200,7 @@ class ConfigManager:
                 new_value = self.__prompt_value_builtin(prompt_text, current_value, config_item)
                 is_valid_value = True
             except (TypeError, ValueError):
-                sys.stderr.write(
-                    f"Error: {new_value} is not a valid {config_item.value_type}\n"
-                )
+                sys.stderr.write(f"Error: {new_value} is not a valid {config_item.value_type}\n")
 
         return new_value
 
