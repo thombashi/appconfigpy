@@ -50,12 +50,12 @@ class ConfigItem:
         if default_display_style not in DefaultDisplayStyle:
             raise ValueError(f"invalid display style: actual={default_display_style}")
 
-        self.config_name = name
-        self.value_type = value_type
-        self.initial_value = initial_value
-        self.prompt_text = prompt_text if prompt_text else name
-        self.default_display_style = default_display_style
-        self.required = required
+        object.__setattr__(self, "config_name", name)
+        object.__setattr__(self, "value_type", value_type)
+        object.__setattr__(self, "initial_value", initial_value)
+        object.__setattr__(self, "prompt_text", prompt_text if prompt_text else name)
+        object.__setattr__(self, "default_display_style", default_display_style)
+        object.__setattr__(self, "required", required)
 
 
 class ConfigManager:
