@@ -20,6 +20,11 @@ A Python library to create/load an application configuration file.
     :target: https://pypi.org/project/appconfigpy
     :alt: Supported Python implementations
 
+.. image:: https://github.com/thombashi/appconfigpy/actions/workflows/lint_and_test.yml/badge.svg
+    :target: https://github.com/thombashi/appconfigpy/actions/workflows/lint_and_test.yml
+    :alt: CI status of Linux/macOS/Windows
+
+
 Installation
 ============
 
@@ -107,7 +112,7 @@ Load a configuration file
 
 Dependencies
 ============
-Python 3.5+
+Python 3.7+
 
 Optional Dependencies
 ------------------------------------
