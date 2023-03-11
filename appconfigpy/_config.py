@@ -12,9 +12,9 @@ from ._logger import logger
 
 
 try:
-    import simplejson as json
+    import simplejson as json  # type: ignore
 except ImportError:
-    import json  # type: ignore
+    import json
 
 
 class DefaultDisplayStyle:
