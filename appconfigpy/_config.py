@@ -5,6 +5,7 @@
 import errno
 import os.path
 import sys
+from dataclasses import dataclass
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Union
 
 from ._const import NULL_VALUE
@@ -25,6 +26,7 @@ class DefaultDisplayStyle:
     LIST = [VISIBLE, PART_VISIBLE, HIDDEN]
 
 
+@dataclass(frozen=True)
 class ConfigItem:
     @property
     def show_default(self) -> bool:
