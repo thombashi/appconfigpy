@@ -5,7 +5,7 @@
 import errno
 import os.path
 import sys
-from typing import Any, Dict, Mapping, Optional, Sequence
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Union
 
 from ._const import NULL_VALUE
 from ._logger import logger
@@ -88,7 +88,9 @@ class ConfigManager:
         )
         self.__config_items = config_items
 
-    def load(self, config_filepath: Optional[str] = None) -> Dict[str, Any]:
+    def load(
+        self, config_filepath: Optional[str] = None
+    ) -> Dict[str, Union[int, float, str, None]]:
         if not config_filepath:
             config_filepath = self.config_filepath
 
@@ -103,8 +105,8 @@ class ConfigManager:
             f"config file loaded: path='{config_filepath}', entries={len(loaded_configs)}"
         )
 
-        valid_configs = {}
-        invalid_configs = []
+        valid_configs: Dict[str, Union[int, float, str, None]] = {}
+        invalid_configs: List[str] = []
 
         for config_item in self.__config_items:
             if config_item.config_name not in loaded_configs:
