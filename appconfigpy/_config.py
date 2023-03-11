@@ -7,7 +7,7 @@ import errno
 import os.path
 import sys
 from dataclasses import dataclass
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Union
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Type, Union
 
 from ._const import NULL_VALUE
 from ._logger import logger
@@ -27,35 +27,31 @@ class DefaultDisplayStyle(enum.Enum):
 
 @dataclass(frozen=True)
 class ConfigItem:
+    name: str
+    initial_value: Any
+    value_type: Type = str
+    prompt_text: str = ""
+    default_display_style: DefaultDisplayStyle = DefaultDisplayStyle.VISIBLE
+    required: bool = False
+
+    @property
+    def config_name(self) -> str:
+        return self.name
+
     @property
     def show_default(self) -> bool:
         return self.default_display_style == DefaultDisplayStyle.VISIBLE
 
-    def __init__(
-        self,
-        name: str,
-        initial_value: Any,
-        value_type=str,
-        prompt_text: Optional[str] = None,
-        default_display_style: DefaultDisplayStyle = DefaultDisplayStyle.VISIBLE,
-        required: bool = False,
-    ):
+    def __post_init__(self) -> None:
         try:
             import typepy
 
-            typepy.type.String(name).validate()
+            typepy.type.String(self.name).validate()
         except ImportError:
             pass
 
-        if default_display_style not in DefaultDisplayStyle:
-            raise ValueError(f"invalid display style: actual={default_display_style}")
-
-        object.__setattr__(self, "config_name", name)
-        object.__setattr__(self, "value_type", value_type)
-        object.__setattr__(self, "initial_value", initial_value)
-        object.__setattr__(self, "prompt_text", prompt_text if prompt_text else name)
-        object.__setattr__(self, "default_display_style", default_display_style)
-        object.__setattr__(self, "required", required)
+        if self.default_display_style not in DefaultDisplayStyle:
+            raise ValueError(f"invalid display style: actual={self.default_display_style}")
 
 
 class ConfigManager:
