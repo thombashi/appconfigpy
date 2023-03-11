@@ -65,6 +65,12 @@ class ConfigManager:
 
     @property
     def config_file_path(self):
+        import warnings
+
+        warnings.warn(
+            "'config_file_path' property has moved to 'config_filepath'", DeprecationWarning
+        )
+
         return self.__config_filepath
 
     @property
