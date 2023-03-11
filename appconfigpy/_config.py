@@ -93,14 +93,14 @@ class ConfigManager:
             config_filepath = self.config_filepath
 
         if not os.path.isfile(config_filepath):
-            self.__logger.debug("config file not found: path='{}'".format(config_filepath))
+            self.__logger.debug(f"config file not found: path='{config_filepath}'")
             return {}
 
         with open(config_filepath) as f:
             loaded_configs = json.load(f)
 
         self.__logger.debug(
-            "config file loaded: path='{}', entries={}".format(config_filepath, len(loaded_configs))
+            f"config file loaded: path='{config_filepath}', entries={len(loaded_configs)}"
         )
 
         valid_configs = {}
@@ -116,7 +116,7 @@ class ConfigManager:
             valid_configs[config_item.config_name] = loaded_configs.get(config_item.config_name)
 
         self.__logger.debug(
-            "valid loaded configurations: {}/{}".format(len(valid_configs), len(loaded_configs))
+            f"valid loaded configurations: {len(valid_configs)}/{len(loaded_configs)}"
         )
 
         if invalid_configs:
@@ -158,7 +158,7 @@ class ConfigManager:
                 self.__logger.debug("keyboard interrupt")
                 return errno.EINTR
 
-        self.__logger.debug("written {} configurations".format(len(self.__config_items)))
+        self.__logger.debug(f"written {len(self.__config_items)} configurations")
 
         return self.__write_config(new_config)
 
@@ -181,9 +181,9 @@ class ConfigManager:
         self, prompt_text: str, current_value: Any, config_item: ConfigItem
     ) -> Any:
         if config_item.show_default:
-            prompt_text = "{:s} [{}]: ".format(prompt_text, current_value)
+            prompt_text = f"{prompt_text:s} [{current_value}]: "
         else:
-            prompt_text = "{:s}: ".format(prompt_text)
+            prompt_text = f"{prompt_text:s}: "
 
         return config_item.value_type(input(prompt_text))
 
@@ -201,7 +201,7 @@ class ConfigManager:
                 is_valid_value = True
             except (TypeError, ValueError):
                 sys.stderr.write(
-                    "Error: {} is not a valid {}\n".format(new_value, config_item.value_type)
+                    f"Error: {new_value} is not a valid {config_item.value_type}\n"
                 )
 
         return new_value
@@ -215,6 +215,6 @@ class ConfigManager:
 
             return e.args[0]
 
-        self.__logger.debug("written configurations to '{:s}'".format(self.config_filepath))
+        self.__logger.debug(f"written configurations to '{self.config_filepath:s}'")
 
         return 0
