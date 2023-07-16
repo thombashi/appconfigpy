@@ -64,7 +64,9 @@ class ConfigManager:
         import warnings
 
         warnings.warn(
-            "'config_file_path' property has moved to 'config_filepath'", DeprecationWarning
+            "'config_file_path' property is deprecated and will be removed in the future."
+            " use 'config_filepath' instead.",
+            DeprecationWarning,
         )
 
         return self.__config_filepath
